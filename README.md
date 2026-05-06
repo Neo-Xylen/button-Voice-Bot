@@ -2,7 +2,7 @@
 
 A button-driven, browser-based voice bot that listens to spoken Urdu (and Roman Urdu / English keywords), generates a contextual Urdu reply, and speaks it back — all using the browser's built-in **Web Speech API**. No API keys, no backend, no install steps.
 
-## Features
+''''''''''''''## Features
 
 - 🎤 Press-to-talk microphone button
 - 🗣️ Recognises Urdu (`ur-PK`) speech
