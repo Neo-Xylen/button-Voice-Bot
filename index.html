@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اردو وائس بوٹ | Urdu Voice Bot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>اردو وائس بوٹ</h1>
+      <p class="subtitle">بٹن دبائیں، بولیں، اور جواب اردو میں سنیں</p>
+    </header>
+
+    <section class="controls">
+      <button id="micBtn" class="mic-btn" aria-label="مائیک">
+        <span class="mic-icon">🎤</span>
+        <span class="mic-label">بات کریں</span>
+      </button>
+      <button id="stopBtn" class="stop-btn" aria-label="رکیں">⏹ رکیں</button>
+      <button id="clearBtn" class="clear-btn" aria-label="صاف کریں">🗑 صاف کریں</button>
+    </section>
+
+    <section class="status" id="status">تیار ہے۔ بٹن دبا کر بات شروع کریں۔</section>
+
+    <section class="conversation" id="conversation" aria-live="polite"></section>
+
+    <footer>
+      <small>براؤزر کی Web Speech API استعمال ہو رہی ہے۔ بہترین تجربے کے لیے Chrome استعمال کریں۔</small>
+    </footer>
+  </main>
+
+  <script src="responses.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
