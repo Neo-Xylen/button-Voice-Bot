@@ -2,8 +2,17 @@
 <html lang="ur" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>اردو وائس بوٹ</title>
+  <meta name="description" content="Voice-driven Urdu chatbot — listens, understands, and replies in Urdu." />
+  <meta name="theme-color" content="#7c5cff" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Urdu Bot" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -52,6 +61,15 @@
           <button class="pill" data-lang="en-US">EN</button>
         </div>
       </div>
+
+      <button id="installBtn" class="install-btn" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>ایپ انسٹال کریں</span>
+      </button>
     </aside>
 
     <section class="stage">
@@ -114,5 +132,41 @@
 
   <script src="responses.js"></script>
   <script src="script.js"></script>
+  <script>
+    // PWA: register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").catch(() => {});
+      });
+    }
+
+    // PWA: install prompt
+    let deferredPrompt = null;
+    const installBtn = document.getElementById("installBtn");
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (installBtn) installBtn.hidden = false;
+    });
+    if (installBtn) {
+      installBtn.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBtn.hidden = true;
+      });
+    }
+    window.addEventListener("appinstalled", () => {
+      if (installBtn) installBtn.hidden = true;
+    });
+
+    // Auto-trigger listening if launched via app shortcut
+    if (new URLSearchParams(location.search).get("action") === "listen") {
+      window.addEventListener("load", () => {
+        setTimeout(() => document.getElementById("micBtn")?.click(), 600);
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+{
+  "name": "اردو وائس بوٹ",
+  "short_name": "Urdu Bot",
+  "description": "Voice-driven Urdu chatbot powered by the Web Speech API",
+  "lang": "ur",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0d12",
+  "theme_color": "#7c5cff",
+  "categories": ["productivity", "utilities", "education"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start talking",
+      "short_name": "Talk",
+      "description": "Open and start listening",
+      "url": "./index.html?action=listen"
+    }
+  ]
+}
