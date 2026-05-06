@@ -3,32 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>اردو وائس بوٹ | Urdu Voice Bot</title>
+  <title>اردو وائس بوٹ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="app">
-    <header>
-      <h1>اردو وائس بوٹ</h1>
-      <p class="subtitle">بٹن دبائیں، بولیں، اور جواب اردو میں سنیں</p>
-    </header>
+  <div class="bg-orbs">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
 
-    <section class="controls">
-      <button id="micBtn" class="mic-btn" aria-label="مائیک">
-        <span class="mic-icon">🎤</span>
-        <span class="mic-label">بات کریں</span>
-      </button>
-      <button id="stopBtn" class="stop-btn" aria-label="رکیں">⏹ رکیں</button>
-      <button id="clearBtn" class="clear-btn" aria-label="صاف کریں">🗑 صاف کریں</button>
+  <main class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </div>
+        <div>
+          <h1>اردو وائس بوٹ</h1>
+          <p class="tagline">آواز سے بات، آواز میں جواب</p>
+        </div>
+      </div>
+
+      <div class="tips card">
+        <h3>تجاویز</h3>
+        <ul>
+          <li>السلام علیکم کہیں</li>
+          <li>"وقت کیا ہے؟" پوچھیں</li>
+          <li>"ایک لطیفہ سناؤ"</li>
+          <li>"تمہارا نام کیا ہے؟"</li>
+          <li>"موسم کیسا ہے؟"</li>
+        </ul>
+      </div>
+
+      <div class="lang-toggle card">
+        <h3>زبان</h3>
+        <div class="lang-pills">
+          <button class="pill active" data-lang="ur-PK">اردو</button>
+          <button class="pill" data-lang="hi-IN">हिंदी</button>
+          <button class="pill" data-lang="en-US">EN</button>
+        </div>
+      </div>
+    </aside>
+
+    <section class="stage">
+      <header class="stage-header">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="status">تیار ہے</span>
+      </header>
+
+      <div class="conversation" id="conversation" aria-live="polite">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">💬</div>
+          <p>گفتگو شروع کرنے کے لیے نیچے مائیک دبائیں</p>
+        </div>
+      </div>
+
+      <div class="mic-area">
+        <div class="visualizer" id="visualizer">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="mic-wrap">
+          <button id="micBtn" class="mic-btn" aria-label="مائیک">
+            <span class="mic-ring"></span>
+            <span class="mic-ring delay"></span>
+            <svg class="mic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="action-row">
+          <button id="stopBtn" class="action-btn" title="رکیں">
+            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+            <span>رکیں</span>
+          </button>
+          <button id="clearBtn" class="action-btn" title="صاف کریں">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6"/><path d="M14 11v6"/>
+            </svg>
+            <span>صاف</span>
+          </button>
+          <button id="muteBtn" class="action-btn" title="آواز">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+            <span>آواز</span>
+          </button>
+        </div>
+      </div>
     </section>
-
-    <section class="status" id="status">تیار ہے۔ بٹن دبا کر بات شروع کریں۔</section>
-
-    <section class="conversation" id="conversation" aria-live="polite"></section>
-
-    <footer>
-      <small>براؤزر کی Web Speech API استعمال ہو رہی ہے۔ بہترین تجربے کے لیے Chrome استعمال کریں۔</small>
-    </footer>
   </main>
 
   <script src="responses.js"></script>
